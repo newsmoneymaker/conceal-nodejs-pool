@@ -1,0 +1,15 @@
+[Unit]
+Description=Conceal pool wallet (walletd, 127.0.0.1:46011, no password: local use only)
+After=ccx-node.service
+Requires=ccx-node.service
+
+[Service]
+Type=simple
+User=ccxpool
+ExecStart=/opt/conceal-core/bin/walletd --container-file /opt/conceal-core/wallet/pool.wallet --container-password CHANGE_ME_WALLET_PASSWORD --bind-address 127.0.0.1 --bind-port 46011 --daemon-address 127.0.0.1 --daemon-port 16000
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target

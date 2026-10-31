@@ -1,0 +1,9 @@
+node_modules/
+logs/
+config.json
+redis.conf
+redis/
+STOP_PAYMENTS
+*.log
+hasher/ccxhash
+*.o

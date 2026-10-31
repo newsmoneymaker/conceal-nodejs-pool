@@ -1,0 +1,17 @@
+[Unit]
+Description=Conceal pool: block unlocker (credits the miners after the coinbase maturity)
+After=ccx-pool-redis.service ccx-node.service ccx-wallet-rpc.service
+Requires=ccx-pool-redis.service
+[Service]
+Type=simple
+User=ccxpool
+WorkingDirectory=/opt/conceal-nodejs-pool
+ExecStart=/usr/bin/node /opt/conceal-nodejs-pool/init.js -module=unlocker
+Restart=always
+RestartSec=15
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

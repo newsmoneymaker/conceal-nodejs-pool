@@ -1,0 +1,172 @@
+<!-- Getting started (Conceal). Two language blocks; the one matching the site language is shown. -->
+
+<div class="gs" data-gs="en">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card padding-l-10 padding-r-10" style="border-left:4px solid #1a5fd0;">
+                <div class="stats">
+                    <div><i class="fa fa-bolt"></i> <strong>Tip:</strong> it's usually more convenient to mine through <a href="https://pool-pay.com/#sec-account">pool-pay.com</a> instead of this one coin directly. Register there once, get a personal port, and the miner automatically switches to whichever pool-pay.com coin is most profitable right now &mdash; you can also get paid in USDT instead of the mined coin.</div>
+                    <div><i class="fa fa-terminal"></i> Example: <code>poolpayminer --auto YOUR_PERSONAL_PORT</code> &mdash; one simple port, nothing else to configure.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row push-up-15">
+        <div class="col-sm-6">
+            <h3>Connection details</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <div class="stats">
+                    <div><i class="fa fa-cloud"></i> Pool address: <span class="gsHost"></span>:5200 (plain TCP) or :5201 (TLS)</div>
+                    <div><i class="fa fa-cubes"></i> Algorithm: <strong>CryptoNight-GPU</strong> (<code>cn/gpu</code> in poolpayminer), CPU. Needs a CPU with AES-NI and AVX2 (any x86-64 CPU from roughly 2015 onward).</div>
+                    <div><i class="fa fa-lock"></i> Variable difficulty (vardiff), adjusts automatically to your hashrate.</div>
+                    <div><i class="fa fa-shield"></i> TLS available on ports 5201-5203.</div>
+                </div>
+            </div>
+
+            <h4 class="push-up-15">Username</h4>
+            <div class="card padding-l-10 padding-r-10">
+                <div class="stats">
+                    <div><i class="fa fa-key"></i> Your <strong>Conceal address</strong> (base58, starts with <code>ccx7</code>, 98 characters), optionally with a worker name: <code>ADDRESS+rig1</code> (or <code>ADDRESS.rig1</code>). Add <code>solo:</code> in front of the address for solo mining instead of the default shared (PROP) pool.</div>
+                </div>
+            </div>
+
+            <h4 class="push-up-15">Password</h4>
+            <div class="card padding-l-10 padding-r-10">
+                <div class="stats">
+                    <div><i class="fa fa-key"></i> Anything, for example <code>x</code></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <h3>Mining command</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <p>With poolpayminer (1.1.33+):</p>
+                <pre style="white-space:pre-wrap;word-break:break-all;">poolpayminer -a cn/gpu -o conceal.pool-pay.com:5200 -u YOUR_CCX_ADDRESS+rig1 -p x</pre>
+                <p>With TLS: <code>poolpayminer -a cn/gpu --tls -o conceal.pool-pay.com:5201 -u YOUR_CCX_ADDRESS+rig1 -p x</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row push-up-15">
+        <div class="col-sm-12">
+            <h3 class="push-up-15">About the algorithm (CryptoNight-GPU)</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <p><strong>CryptoNight-GPU</strong> (<code>cn/gpu</code>, Ryo Currency Project's <code>cn_pow_hash_v3</code>) is Conceal's real proof-of-work since its block_major_version 8 hard fork (which also introduced LWMA1 difficulty adjustment and halving emission) -- it replaced an older CryptoNight variant this coin used before that fork. It is computed over the pool's own block-hashing blob (header fields, merkle root, transaction count -- the same general shape every CryptoNote-nodejs-pool coin uses), and needs no merge-mining-tag mutation before hashing, unlike some other CryptoNote forks. The wire protocol itself is the plain cryptonote-nodejs-pool Stratum (a <code>login</code> request, <code>job</code> with blob+target, <code>submit</code> with nonce+result), not classic Bitcoin Stratum either. A stock XMRig does not know this exact algorithm: use <strong>poolpayminer</strong>, which supports it out of the box.</p>
+            </div>
+
+            <h3 class="push-up-15">Software</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <ul>
+                    <li><strong>poolpayminer (Linux x86-64 and Windows x64):</strong> <a href="/downloads/">downloads</a>,
+                        <a href="https://github.com/newsmoneymaker/poolpayminer" target="_blank" rel="noopener">source code</a>. A modified XMRig with CryptoNight-GPU support. <strong>Fee 1%</strong>, shown at start-up.</li>
+                    <li><strong>Pool software source:</strong> not published yet (coming once the rest of the launch checklist is complete).</li>
+                    <li><strong>Wallet</strong> (to get your address): the official <a href="https://conceal.network/" target="_blank" rel="noopener">Conceal</a> wallet/node.</li>
+                </ul>
+            </div>
+
+            <h3 class="push-up-15">Rewards and payments</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <ul>
+                    <li>Reward scheme: <strong>PROP</strong> (proportional, default) or <strong>solo</strong> (prefix your address with <code>solo:</code>).</li>
+                    <li>Block reward follows Conceal's standard CryptoNote emission curve -- see the current value on the Dashboard page.</li>
+                    <li>Blocks are credited to your balance after 60 confirmations (Conceal's real coinbase maturity is 10 blocks / ~20 minutes; the pool waits longer to be safe).</li>
+                    <li><strong>Payments are currently dry-run only.</strong> This will be enabled once a real block matures and the first payout is verified end to end -- it is not a bug, it is an honestly incomplete step at launch.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gs" data-gs="ru">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card padding-l-10 padding-r-10" style="border-left:4px solid #1a5fd0;">
+                <div class="stats">
+                    <div><i class="fa fa-bolt"></i> <strong>Совет:</strong> обычно удобнее майнить через <a href="https://pool-pay.com/#sec-account">pool-pay.com</a>, а не напрямую эту монету. Зарегистрируйтесь там один раз, получите личный порт, и майнер сам переключается на самую выгодную монету pool-pay.com прямо сейчас &mdash; выплаты можно получать в USDT вместо намайненной монеты.</div>
+                    <div><i class="fa fa-terminal"></i> Пример: <code>poolpayminer --auto ВАШ_ЛИЧНЫЙ_ПОРТ</code> &mdash; один простой порт, больше ничего настраивать не нужно.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row push-up-15">
+        <div class="col-sm-6">
+            <h3>Параметры подключения</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <div class="stats">
+                    <div><i class="fa fa-cloud"></i> Адрес пула: <span class="gsHost"></span>:5200 (обычный TCP) или :5201 (TLS)</div>
+                    <div><i class="fa fa-cubes"></i> Алгоритм: <strong>CryptoNight-GPU</strong> (<code>cn/gpu</code> в poolpayminer), процессор. Нужны AES-NI и AVX2 (почти любой x86-64 примерно с 2015 года).</div>
+                    <div><i class="fa fa-lock"></i> Переменная сложность (vardiff), подстраивается под ваш хешрейт автоматически.</div>
+                    <div><i class="fa fa-shield"></i> TLS доступен на портах 5201-5203.</div>
+                </div>
+            </div>
+
+            <h4 class="push-up-15">Логин</h4>
+            <div class="card padding-l-10 padding-r-10">
+                <div class="stats">
+                    <div><i class="fa fa-key"></i> Ваш <strong>адрес Conceal</strong> (base58, начинается на <code>ccx7</code>, 98 символов), можно с именем воркера: <code>АДРЕС+rig1</code> (или <code>АДРЕС.rig1</code>). Добавьте <code>solo:</code> перед адресом для соло-майнинга вместо общего пула (PROP) по умолчанию.</div>
+                </div>
+            </div>
+
+            <h4 class="push-up-15">Пароль</h4>
+            <div class="card padding-l-10 padding-r-10">
+                <div class="stats">
+                    <div><i class="fa fa-key"></i> Любой, например <code>x</code></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <h3>Команда для майнинга</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <p>С poolpayminer (1.1.33+):</p>
+                <pre style="white-space:pre-wrap;word-break:break-all;">poolpayminer -a cn/gpu -o conceal.pool-pay.com:5200 -u ВАШ_CCX_АДРЕС+rig1 -p x</pre>
+                <p>С TLS: <code>poolpayminer -a cn/gpu --tls -o conceal.pool-pay.com:5201 -u ВАШ_CCX_АДРЕС+rig1 -p x</code></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row push-up-15">
+        <div class="col-sm-12">
+            <h3 class="push-up-15">Об алгоритме (CryptoNight-GPU)</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <p><strong>CryptoNight-GPU</strong> (<code>cn/gpu</code>, <code>cn_pow_hash_v3</code> проекта Ryo Currency) — настоящий алгоритм доказательства работы Conceal после её хардфорка на block_major_version 8 (который также ввёл LWMA1-коррекцию сложности и халвинг эмиссии) — он заменил более старый вариант CryptoNight, который эта монета использовала до того форка. Вычисляется над собственным блоком-хэшинг-блобом пула (поля заголовка, merkle root, число транзакций — та же общая форма, что у других монет на cryptonote-nodejs-pool), и, в отличие от некоторых других форков CryptoNote, не требует изменения тега merge-mining перед хэшированием. Сам протокол — это обычный Stratum cryptonote-nodejs-pool (запрос <code>login</code>, задание <code>job</code> с blob+target, отправка <code>submit</code> с nonce+result), а не классический Bitcoin Stratum. Обычный XMRig не знает именно этот алгоритм: используйте <strong>poolpayminer</strong> — он поддерживает его "из коробки".</p>
+            </div>
+
+            <h3 class="push-up-15">Программы</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <ul>
+                    <li><strong>poolpayminer (Linux x86-64 и Windows x64):</strong> <a href="/downloads/">загрузки</a>,
+                        <a href="https://github.com/newsmoneymaker/poolpayminer" target="_blank" rel="noopener">исходный код</a>. Изменённый XMRig с поддержкой CryptoNight-GPU. <strong>Комиссия 1%</strong>, показывается при запуске.</li>
+                    <li><strong>Исходники пула:</strong> пока не опубликованы (появятся после завершения остальных пунктов чек-листа запуска).</li>
+                    <li><strong>Кошелёк</strong> (чтобы получить адрес): официальный узел/кошелёк <a href="https://conceal.network/" target="_blank" rel="noopener">Conceal</a>.</li>
+                </ul>
+            </div>
+
+            <h3 class="push-up-15">Награды и выплаты</h3>
+            <div class="card padding-l-10 padding-r-10">
+                <ul>
+                    <li>Схема наград: <strong>PROP</strong> (пропорциональная, по умолчанию) или <strong>solo</strong> (добавьте <code>solo:</code> перед адресом).</li>
+                    <li>Награда за блок следует стандартной эмиссионной кривой CryptoNote — текущее значение см. на странице "Главная".</li>
+                    <li>После нахождения блока награда зачисляется на баланс после 60 подтверждений (реальный coinbase maturity Conceal — 10 блоков / ~20 минут, пул ждёт дольше для надёжности).</li>
+                    <li><strong>Выплаты сейчас только в тестовом режиме (dry-run).</strong> Это будет включено после того, как реальный блок созреет и первая выплата будет проверена целиком — это не ошибка, а честно незавершённый на старте шаг.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Show the block that matches the site language (falls back to English)
+var gsLang = (typeof langCode !== 'undefined' && langCode === 'ru') ? 'ru' : 'en';
+$('.gs').hide().filter('[data-gs="' + gsLang + '"]').show();
+
+currentPage = {
+    destroy: function () {},
+    update: function () {
+        $('.gsHost').text(getPoolHost());
+    }
+};
+</script>

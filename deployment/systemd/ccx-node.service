@@ -1,0 +1,16 @@
+[Unit]
+Description=Conceal node (conceald)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ccxpool
+ExecStart=/opt/conceal-core/bin/conceald --data-dir /opt/conceal-core/data --p2p-bind-ip 0.0.0.0 --p2p-bind-port 15000 --rpc-bind-ip 127.0.0.1 --rpc-bind-port 16000
+Restart=on-failure
+RestartSec=15
+LimitNOFILE=65536
+TimeoutStopSec=600
+
+[Install]
+WantedBy=multi-user.target

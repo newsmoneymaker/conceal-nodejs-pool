@@ -1,0 +1,19 @@
+[Unit]
+Description=Conceal pool: stratum server (miners, share checking with the ccxhash helper, block submission)
+After=ccx-pool-redis.service ccx-node.service ccx-wallet-rpc.service
+Requires=ccx-pool-redis.service
+[Service]
+Type=simple
+User=ccxpool
+WorkingDirectory=/opt/conceal-nodejs-pool
+ExecStart=/usr/bin/node /opt/conceal-nodejs-pool/init.js -module=pool
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+# ports below 1024 need this:
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=Conceal pool: charts data collector (hash rate, difficulty, miners, workers on the home page)
+After=ccx-pool-redis.service ccx-pool-api.service
+Requires=ccx-pool-redis.service
+[Service]
+Type=simple
+User=ccxpool
+WorkingDirectory=/opt/conceal-nodejs-pool
+ExecStart=/usr/bin/node /opt/conceal-nodejs-pool/init.js -module=chartsDataCollector
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
